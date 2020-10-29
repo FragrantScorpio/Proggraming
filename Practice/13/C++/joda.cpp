@@ -2,12 +2,13 @@
 #include<math.h>;
 int number, ostatok;
 int main() {
-	cout << "Ââåäèòå ÷èñëî";
+	setlocale(LC_CTYPE,"rus");
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã·Ã¨Ã±Ã«Ã®";
 	cin >> number;
 	ostatok = number % 1;
 	if (ostatok != 0) {
-		cout << "Ïğîñòîå";
+		cout << "ÃÃ°Ã®Ã±Ã²Ã®Ã¥";
 	}
 	else { 
-	cout << "Ñîñòàâíîå"; }
+	cout << "Ã‘Ã®Ã±Ã²Ã Ã¢Ã­Ã®Ã¥"; }
 }
