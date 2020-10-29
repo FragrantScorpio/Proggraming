@@ -1,7 +1,7 @@
 #include<iostream>;
 #include <ctime>;
 using namespace std;
-int randomN,userN,fails,win,game;
+int randomN, userN, fails, win, game;
 int main() {
 	setlocale(LC_CTYPE, "rus");
 	srand(time(0));
@@ -9,7 +9,7 @@ int main() {
 	cout << "Попробуйте угадать мое загаданное число, у вас 5 попыток\n";
 	fails = 0;
 	game = 1;
-	win = 1;
+	win = 0;
 	while (game == 1) {
 		while (fails < 5) {
 			cin >> userN;
@@ -31,11 +31,12 @@ int main() {
 		}
 		if (win == 0) {
 			if (fails == 5) {
-				cout << "Вы проиграли\n";
+				cout << "Вы проиграли, загаданное число:" << randomN<<"\n";
 				cout << "Хотите снова?\n1.Да\n2.Нет\n";
 				cin >> game;
-				if (game == 1) { fails = 0; 
-				cout << "Попробуйте угадать мое загаданное число, у вас 5 попыток\n";
+				if (game == 1) {
+					fails = 0;
+					cout << "Попробуйте угадать мое загаданное число, у вас 5 попыток\n";
 				}
 				else break;
 			}
@@ -43,8 +44,9 @@ int main() {
 		if (win == 1) {
 			cout << "Хотите снова?\n1.Да\n2.Нет\n";
 			cin >> game;
-			if (game == 1) { fails = 0;
-			cout << "Попробуйте угадать мое загаданное число, у вас 5 попыток\n";
+			if (game == 1) {
+				fails = 0;
+				cout << "Попробуйте угадать мое загаданное число, у вас 5 попыток\n";
 			}
 			else break;
 		}
