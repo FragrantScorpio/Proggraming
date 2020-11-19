@@ -29,4 +29,4 @@
 <p>1. Теоретическая часть<br> 
 <p>1.1 Структура http-запроса<br>
 <p>Общая схема интернет ссылки сайта<br>
-<h3 align="center">[](FragrantScorpio/Programming/Lab/image/Pic01.png)
+<h3 align="center">[](./image/Pic01.png)
