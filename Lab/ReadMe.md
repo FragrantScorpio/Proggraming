@@ -82,4 +82,4 @@
 
 <p>Вот результат(Рис.11)
 <p> 2.5 серверное приложение C++ 
-[](Lab1/Lab1.cpp)
+[](FragrantScorpio/Programming/Lab1/Lab1.cpp)
