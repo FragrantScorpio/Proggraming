@@ -12,7 +12,7 @@ vector<int> outdata(vector<int> sorting, int sizing) {
 	{
 		for (int i = 0; i < sizing; i++)
 		{
-			if (i < 5)
+			if (i < 5)// тут для случая где сигналов меньше пяти
 			{
 			cout << sorting[i] << ' ';
 			}
@@ -24,7 +24,7 @@ vector<int> outdata(vector<int> sorting, int sizing) {
 	}
 	else
 	{
-		for (int i = sorting.size()- 5; i < sorting.size(); i++)
+		for (int i = sorting.size()- 5; i < sorting.size(); i++)//тут где больше 5
 		{
 			cout << sorting[i] << ' ';
 		}
@@ -48,9 +48,7 @@ int main() {
 	cout << "Вот отсортированный вариант Сэр!\n";
 	for (int i = 0; i < maine.size(); i++)
 	{
-		sorting.push_back(maine[i]);
-		int sizing = sorting.size();
-		outdata(sorting, sizing);
+		sorting.push_back(maine[i]);int sizing = sorting.size();outdata(sorting, sizing);
 
 	}
 }
