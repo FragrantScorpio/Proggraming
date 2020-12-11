@@ -8,7 +8,7 @@ using namespace std;
 vector<int> outdata(vector<int> sorting, int sizing) {
 	int count = 0;
 	sort(sorting.begin(), sorting.end(), greater<int>());// с помощью библиотеки алгоритмов, мы сократили код, и все еще можем отсортировать наши значения
-	if ((sorting.size() < 5))// тут частные случаи при значениях меньше 5, и дальше при больше 5, чтоб согласовано было с условием
+	        if ((sorting.size() < 5))// тут частные случаи при значениях меньше 5, и дальше при больше 5, чтоб согласовано было с условием
 	{
 		for (int i = 0; i < sizing; i++)
 		{
@@ -18,18 +18,23 @@ vector<int> outdata(vector<int> sorting, int sizing) {
 			}
 			else
 			{
+				
 				break;
 			}
+			
 		}
 	}
-	else
+	    else
 	{
+		    
 		for (int i = sorting.size()- 5; i < sorting.size(); i++)//тут где больше 5
 		{
 			cout << sorting[i] << ' ';
 		}
 	}
+	
 	cout << "\n";
+	
 	return sorting;
 }
 
