@@ -12,13 +12,14 @@ template<class T> using matrixT = vector<vectorT<T>>;
 template<class T>
 bool BiggerN(const T& first, const T& second)
 {
+    
     return first > second;
 }
-
 template<class T>
 bool Less(const T& first, const T& second)
 {
-    return first < second;
+    
+  return first < second;
 }
 template<class T>
 bool Sorted(const vectorT<T>& vector, const bool& asc)
@@ -32,8 +33,7 @@ bool Sorted(const vectorT<T>& vector, const bool& asc)
             return false;
         }
     }
-
-    return true;
+   return true;
 }
 
 template<class T>
@@ -42,21 +42,23 @@ vectorT<T> BozoSort(const vectorT<T>& vector, const bool& asc) //сама сор
 
 {
     vectorT<T> result = vector;
+   
     if (vector.size() < 2)
+    
     {
         return result;
     }
-
-    const size_t size = result.size();
+const size_t size = result.size();
     while (!Sorted(result, asc))
     {
-        swap(result[std::rand() % size], result[std::rand() % size]);
+       swap(result[std::rand() % size], result[std::rand() % size]);
     }
     return result;
 }
 
 template<class T>
-vectorT<T> BozoSort(const matrixT<T>& matrix, const bool& asc) //для второго где вектор в векторе
+
+    vectorT<T> BozoSort(const matrixT<T>& matrix, const bool& asc) //для второго где вектор в векторе
 {
     vectorT<T> result;
     for (const vectorT<T>& row : matrix)
@@ -71,14 +73,15 @@ vectorT<T> BozoSort(const matrixT<T>& matrix, const bool& asc) //для втор
 }
 
 template<class T>
-vectorT<T> BozoSort(const T& a, const T& b, const T& c, const bool& asc) //и для третьего, где просто три значения
+
+    vectorT<T> BozoSort(const T& a, const T& b, const T& c, const bool& asc) //и для третьего, где просто три значения
 {
     vectorT<T> vector = { a, b, c };
     return BozoSort(vector, asc);
 }
 
-template<class T>
-void print(const vectorT<T>& vector)//это для вывода
+
+template<class T>void print(const vectorT<T>& vector)//это для вывода
 {
     for (size_t i = 0; i < vector.size() - 1; ++i)
     {
@@ -90,7 +93,8 @@ void print(const vectorT<T>& vector)//это для вывода
 
 
 template<class T>
-void out()//это вывод
+
+    void out()//это вывод
 {
     setlocale(LC_CTYPE, "rus");
     unsigned int n;
