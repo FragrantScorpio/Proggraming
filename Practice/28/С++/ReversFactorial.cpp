@@ -1,7 +1,7 @@
-﻿#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <map>
+﻿#include <iostream>;
+#include <vector>;
+#include <algorithm>;
+#include <map>;
 using namespace std;
 
 void print_factorization(unsigned int number)
