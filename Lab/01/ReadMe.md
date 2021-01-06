@@ -56,6 +56,7 @@
 3)Так же изучили пример ответа от сайта worldtimeapi<br>
 ![](./image/pic1.png)<br>
 4)Код серверного приложения<br>
+
 ```cpp
 #include <iostream>
 #include <cpp_httplib/httplib.h>
@@ -82,7 +83,7 @@ void gen_response(const Request& req, Response& res) {
     string Picture;
     float Temp;
 
-    Client cli1("http://worldtimeapi.org");
+Client cli1("http://worldtimeapi.org");
     // Отправляем get-запрос и ждём ответ, который сохраняется в переменной res
     auto res1 = cli1.Get("/api/timezone/Europe/Simferopol");
     // res преобразуется в true, если запрос-ответ прошли без ошибок
@@ -106,7 +107,7 @@ void gen_response(const Request& req, Response& res) {
 
     Client cli2("http://api.openweathermap.org");
     // Отправляем get-запрос и ждём ответ, который сохраняется в переменной res
-    auto res2 = cli2.Get("/data/2.5/forecast?id=524901&appid=3d39302576a79c67051688878116f7c4&lat=44.952116&lon=34.102411&exclude=current,minutely,daily,alerts&units=metric&lang=ru");
+    auto res2 = cli2.Get("/data/2.5/forecastid=524901&appid=3d39302576a79c67051688878116f7c4&lat=44.952116&lon=34.102411&exclude=current,minutely,daily,alerts&units=metric&lang=ru");
     // res преобразуется в true, если запрос-ответ прошли без ошибок
     if (res2) {
         // Проверяем статус ответа, т.к. может быть 404 и другие
@@ -161,9 +162,6 @@ void gen_response(const Request& req, Response& res) {
     
 }
 
-
-
-
 void gen_response_raw(const Request& req, Response& res) {
     string RawTemp;
     float Picture;
@@ -187,11 +185,10 @@ void gen_response_raw(const Request& req, Response& res) {
     }
     json j = json::parse(res1->body);
     int CurrentTime = j["unixtime"];
-
-
-    Client cli2("http://api.openweathermap.org");
+    
+Client cli2("http://api.openweathermap.org");
     // Отправляем get-запрос и ждём ответ, который сохраняется в переменной res
-    auto res2 = cli2.Get("/data/2.5/forecast?id=524901&appid=3d39302576a79c67051688878116f7c4&lat=44.952116&lon=34.102411&exclude=current,minutely,daily,alerts&units=metric&lang=ru");
+    auto res2 = cli2.Get("/data/2.5/forecastid=524901&appid=3d39302576a79c67051688878116f7c4&lat=44.952116&lon=34.102411&exclude=current,minutely,daily,alerts&units=metric&lang=ru");
     // res преобразуется в true, если запрос-ответ прошли без ошибок
     if (res2) {
         // Проверяем статус ответа, т.к. может быть 404 и другие
@@ -220,7 +217,6 @@ void gen_response_raw(const Request& req, Response& res) {
 
     }
   
- 
 int main() {
     Server svr;                    // Создаём сервер (пока-что не запущен)
     svr.Get("/", gen_response); // Вызвать функцию gen_response если кто-то обратиться к корню "сайта"
