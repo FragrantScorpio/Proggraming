@@ -55,7 +55,7 @@
 ![](./imag/pic01.png)
 <br>
 3)Так же изучили пример ответа от сайта worldtimeapi<br>
-![](./imag/pic02.png)
+![bruh](./imag/pic02.png)
 <br>
 4)Код серверного приложения<br>
 
