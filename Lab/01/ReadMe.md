@@ -56,7 +56,7 @@
 3)Так же изучили пример ответа от сайта worldtimeapi<br>
 ![](./image/pic1.png)<br>
 4)Код серверного приложения<br>
-
+```cpp
     #include <iostream>
     #include <cpp_httplib/httplib.h>
     #include <nlohmann/json.hpp>
@@ -228,8 +228,9 @@
     }
     
 <br>
+```
 5)Код клиентского приложения<br>
-
+```python
     from tkinter import *
     import json
     import requests
@@ -273,7 +274,7 @@
 
     reload_data()
     root.mainloop()
-    
+```
 <br>
 6)Графический интерфейс клиентский<br>
 ![](./image/pic1.png)<br>
