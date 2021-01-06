@@ -56,7 +56,8 @@
 3)Так же изучили пример ответа от сайта worldtimeapi<br>
 ![](./image/pic1.png)<br>
 4)Код серверного приложения<br>
-![]'''#include <iostream>
+'''
+#include <iostream>
 #include <cpp_httplib/httplib.h>
 #include <nlohmann/json.hpp>
 #include <string>
@@ -225,7 +226,8 @@ int main() {
     std::cout << "Start server... OK\n";
     svr.listen("localhost", 3000); 
 }
-'''<br>
+'''
+<br>
 5)Код клиентского приложения<br>
 ![](./image/pic1.png)<br>
 6)Графический интерфейс клиентский<br>
