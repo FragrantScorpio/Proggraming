@@ -57,26 +57,26 @@
 ![](./image/pic1.png)<br>
 4)Код серверного приложения<br>
 ```cpp
-    #include <iostream>
-    #include <cpp_httplib/httplib.h>
-    #include <nlohmann/json.hpp>
-    #include <string>
-    #include <fstream>
-    #include <sstream>
-    
-    using namespace httplib;
-    using namespace std;
-    using json = nlohmann::json;
+#include <iostream>
+#include <cpp_httplib/httplib.h>
+#include <nlohmann/json.hpp>
+#include <string>
+#include <fstream>
+#include <sstream>
 
-    void Replacement(std::string& data, std::string toSearch, std::string replaceStr) {
+using namespace httplib;
+using namespace std;
+using json = nlohmann::json;
+
+void Replacement(std::string& data, std::string toSearch, std::string replaceStr) {
     size_t pos = data.find(toSearch);
     while (pos != std::string::npos) {
         data.replace(pos, toSearch.size(), replaceStr);
         pos = data.find(toSearch, pos + replaceStr.size());
     }
-    }
+}
 
-    void gen_response(const Request& req, Response& res) {
+void gen_response(const Request& req, Response& res) {
     setlocale(LC_CTYPE, "rus");
     string CurrentWeather;
     string Picture;
@@ -106,7 +106,7 @@
 
     Client cli2("http://api.openweathermap.org");
     // Отправляем get-запрос и ждём ответ, который сохраняется в переменной res
-    auto res2 = cli2.Get("/data/2.5/forecast?   id=524901&appid=3d39302576a79c67051688878116f7c4&lat=44.952116&lon=34.102411&exclude=current,minutely,daily,alerts&units=metric&lang=ru");
+    auto res2 = cli2.Get("/data/2.5/forecast?id=524901&appid=3d39302576a79c67051688878116f7c4&lat=44.952116&lon=34.102411&exclude=current,minutely,daily,alerts&units=metric&lang=ru");
     // res преобразуется в true, если запрос-ответ прошли без ошибок
     if (res2) {
         // Проверяем статус ответа, т.к. может быть 404 и другие
@@ -159,12 +159,12 @@
    
         res.set_content(str, "text/html;charset=utf-8");
     
-    }
+}
 
 
 
 
-    void gen_response_raw(const Request& req, Response& res) {
+void gen_response_raw(const Request& req, Response& res) {
     string RawTemp;
     float Picture;
     string RawWeather;
@@ -219,15 +219,15 @@
          res.set_content(out.dump(), "text/json;charset=utf-8");
 
     }
-    int main() {
+  
+ 
+int main() {
     Server svr;                    // Создаём сервер (пока-что не запущен)
     svr.Get("/", gen_response); // Вызвать функцию gen_response если кто-то обратиться к корню "сайта"
     svr.Get("/raw", gen_response_raw);// Вызвать функцию gen_response_raw если кто-то обратиться к сырому кэшу сайта
     std::cout << "Start server... OK\n";
     svr.listen("localhost", 3000); 
-    }
-    
-<br>
+}
 ```
 5)Код клиентского приложения<br>
 ```python
