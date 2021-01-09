@@ -74,6 +74,7 @@
 5)Ссылка на excel файл<br>
 "ссылка"<br>
 6)Код серверного приложения<br>
+```cpp
 #include <iostream>
 #include <cpp_httplib/httplib.h>
 #include <nlohmann/json.hpp>
@@ -971,5 +972,5 @@ int main()
 
 	srv.listen("localhost", 1234);
 }
-'''
+```
 7)Кол клиентского приложения<br>
