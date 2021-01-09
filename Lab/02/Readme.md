@@ -421,8 +421,10 @@ json help_state_buttons =
 	},
 };
 
+json GetConfig();
+
 json gen_response(const std::string& text,
-	const std::string& tts,
+	const string& tts,
 	const json& buttons,
 	const json* current_session = nullptr,
 	const bool end_session = false)
@@ -453,12 +455,11 @@ json gen_response(const std::string& text,
 	}
 	return response;
 }
-
 void AliceSkill(const Request& req, Response& res)
 {
 	json req_json = json::parse(req.body);
 
-	std::string user_id = req_json["session"]["application"]["application_id"];
+	string user_id = req_json["session"]["application"]["application_id"];
 	json response;
 	json* cur_session = nullptr;
 
@@ -514,13 +515,13 @@ void AliceSkill(const Request& req, Response& res)
 		return;
 	}
 
-	std::string command = req_json["request"]["command"];
+	string command = req_json["request"]["command"];
 	if ((*cur_session)["skill_mode"] == help_mode)
 	{
 		// молчать, говорить, помощь, корзина, выйти из помощи, покупка завершена, сумма
 		// О чём ещё рассказать?
-		std::string text;
-		std::string tts;
+		string text;
+		string tts;
 
 		if (command == "молчать")
 		{
@@ -585,8 +586,8 @@ void AliceSkill(const Request& req, Response& res)
 	{
 		if (command == "молчать")
 		{
-			std::string text = "Молчу, молчу";
-			std::string tts;
+			string text = "Молчу, молчу";
+			string tts;
 			(*cur_session)["voice_mode"] = silent_mode;
 			json response = gen_response(
 				text,
@@ -597,8 +598,8 @@ void AliceSkill(const Request& req, Response& res)
 		}
 		else if (command == "говорить")
 		{
-			std::string text = "Хорошо.";
-			std::string tts = "Хорош+о.";
+			string text = "Хорошо.";
+			string tts = "Хорош+о.";
 			(*cur_session)["voice_mode"] = speak_mode;
 			json response = gen_response(
 				text,
@@ -609,14 +610,14 @@ void AliceSkill(const Request& req, Response& res)
 		}
 		else if (command == "помощь")
 		{
-			std::string text =
+			string text =
 				"Говорить или молчать. Включает и выключает голосовой режим.\n"
 				"Корзина. Позволяет вести список покупок, а так же их совершать.\n"
 				"Помощь. Рассказывает о возможностях этого навыка.\n"
 				"Совершить покупку. Очищает корзину и сохраняет данные в формате эксель.\n"
 				"Сумма. Считает сумму товаров и называет её вам.\n"
 				"О чём рассказать подробнее?";
-			std::string tts =
+			string tts =
 				"Говорить или молчать. Включает и выключает голосовой режим.\n"
 				"Корзина. Позволяет вести список покупок, а так же их совершать.\n"
 				"Помощь. Рассказывает о возможностях этого навыка.\n"
@@ -633,8 +634,8 @@ void AliceSkill(const Request& req, Response& res)
 		}
 		else if (command == "очистить корзину")
 		{
-			std::string text = "Корзина пуста.";
-			std::string tts = "Кориз+ина пуст+а.";
+			string text = "Корзина пуста.";
+			string tts = "Кориз+ина пуст+а.";
 			json response = gen_response(
 				text,
 				tts,
@@ -646,10 +647,10 @@ void AliceSkill(const Request& req, Response& res)
 		}
 		else if (command == "что в корзине")
 		{
-			std::cout << "cart: " << (*cur_session)["cart"] << std::endl;
+			cout << "cart: " << (*cur_session)["cart"];
 
-			std::string text;
-			std::string tts;
+			string text;
+			string tts;
 
 			if ((*cur_session)["cart"].empty())
 			{
@@ -664,9 +665,9 @@ void AliceSkill(const Request& req, Response& res)
 					int price = elem["price"].get<int>();
 
 					text += "\n"
-						+ elem["item"].get<std::string>()
+						+ elem["item"].get<string>()
 						+ " ценой "
-						+ std::to_string(price);
+						+ to_string(price);
 
 					if (price % 10 == 0)
 					{
@@ -698,8 +699,8 @@ void AliceSkill(const Request& req, Response& res)
 		}
 		else if (command == "покупка завершена")
 		{
-			std::string text = "Заходите ещё!";
-			std::string tts = "Заход+ите ещ+ё!";
+			string text = "Заходите ещё!";
+			string tts = "Заход+ите ещ+ё!";
 
 			json output =
 			{
@@ -709,7 +710,7 @@ void AliceSkill(const Request& req, Response& res)
 
 			json config = GetConfig(); // webhooks.cpp
 
-			for (std::string link : config["webhooks"])
+			for (string link : config["webhooks"])
 			{
 				// Либа не работает с https ссылками.
 				Replacement(link, "https://", "http://");
@@ -717,7 +718,7 @@ void AliceSkill(const Request& req, Response& res)
 				// Если передали линк без '/' на конце, добавляем его
 				if (link.find("http://") != 0)
 				{
-					std::cout << "bad link" << std::endl;
+					cout << "bad link";
 					continue;
 				}
 
@@ -729,17 +730,17 @@ void AliceSkill(const Request& req, Response& res)
 				// найти первую / после объявления протокола и "//"
 
 				int index = link.find('/', http_protocol_size);
-				if (index == std::string::npos)
+				if (index == string::npos)
 				{
 					link.push_back('/');
 					index = link.length() - 1;
 				}
 
-				std::cout << "test: " << link.substr(0, index) << std::endl;
-				std::cout << "2nd : " << link.substr(index, std::string::npos).c_str() << std::endl;
+				cout << "test: " << link.substr(0, index);
+				cout << "2nd : " << link.substr(index, string::npos).c_str();
 
 				Client cli(link.substr(0, index).c_str());
-				cli.Post(link.substr(index, std::string::npos).c_str(), output.dump(2), "application/json; charset=UTF-8");
+				cli.Post(link.substr(index, string::npos).c_str(), output.dump(2), "application/json; charset=UTF-8");
 			}
 
 			(*cur_session).erase("cart");
@@ -755,8 +756,8 @@ void AliceSkill(const Request& req, Response& res)
 		}
 		else if (command == "сумма")
 		{
-			std::string text = "";
-			std::string tts = "";
+			string text = "";
+		    string tts = "";
 
 			size_t size = req_json["request"]["nlu"]["tokens"].size();
 			int sum = 0;
@@ -771,8 +772,8 @@ void AliceSkill(const Request& req, Response& res)
 			}
 			else
 			{
-				text = "В общей сумме у вас товаров на " + std::to_string(sum);
-				tts = "В +общей с+умме у вас тов+аров на " + std::to_string(sum);
+				text = "В общей сумме у вас товаров на " + to_string(sum);
+				tts = "В +общей с+умме у вас тов+аров на " + to_string(sum);
 				if (sum % 10 == 0)
 				{
 					text += " рублей.";
@@ -805,23 +806,23 @@ void AliceSkill(const Request& req, Response& res)
 		else if (command.find("добавить в корзину") == 0 || command.find("добавь в корзину") == 0)
 		{
 			size_t size = req_json["request"]["nlu"]["tokens"].size();
-			std::string text = "ОК.";
-			std::string tts = "Ок+ей.";
-			std::string item_name;
+			string text = "ОК.";
+			string tts = "Ок+ей.";
+			string item_name;
 			int			item_price = 0;
 			int			number_index = 0;
 			bool			number_index_set = false;
 
 			for (auto entity : req_json["request"]["nlu"]["entities"])
 			{
-				if (entity["type"].get<std::string>() == "YANDEX.NUMBER")
+				if (entity["type"].get<string>() == "YANDEX.NUMBER")
 				{
 					number_index = entity["tokens"]["start"];
-					std::cout << entity["value"].type_name() << std::endl;
+					cout << entity["value"].type_name();
 					//if (entity["value"].type() == json::value_t::number_integer)
 					//{
 					int val = entity["value"];
-					std::cout << "Инфо: цена " << val << std::endl;
+					cout << "Инфо: цена " << val;
 					if (val < 0)
 					{
 						text = "Цена не может быть отрицательной.";
@@ -882,17 +883,17 @@ void AliceSkill(const Request& req, Response& res)
 		else if (command.find("удалить из корзины") == 0 || command.find("удали из корзины") == 0
 			|| command.find("убрать из корзины") == 0 || command.find("убери из корзины") == 0)
 		{
-			std::cout << (*cur_session)["cart"] << std::endl;
+			cout << (*cur_session)["cart"];
 			size_t size = req_json["request"]["nlu"]["tokens"].size();
 
-			std::string text;
-			std::string tts;
-			std::string item_name = "";
+			string text;
+			string tts;
+			string item_name = "";
 
 			for (int i = 3; i < size; ++i)
 			{
-				std::cout << req_json["request"]["nlu"]["tokens"][i].get<std::string>() << std::endl;
-				item_name += req_json["request"]["nlu"]["tokens"][i].get<std::string>();
+				cout << req_json["request"]["nlu"]["tokens"][i].get<string>();
+				item_name += req_json["request"]["nlu"]["tokens"][i].get<string>();
 				item_name += " ";
 			}
 			bool found_item = false;
@@ -908,7 +909,7 @@ void AliceSkill(const Request& req, Response& res)
 				item_name.pop_back();
 				for (auto& cart_item : (*cur_session)["cart"])
 				{
-					if (cart_item["item"].get<std::string>() == item_name)
+					if (cart_item["item"].get<string>() == item_name)
 					{
 						found_item = true;
 						break;
@@ -917,17 +918,17 @@ void AliceSkill(const Request& req, Response& res)
 				}
 				if (!found_item)
 				{
-					std::cout << "Инфо: такой предмет не был найден" << std::endl;
+					cout << "Инфо: такой предмет не был найден";
 					text = "Такого в вашей корзине нету";
 					tts = "Так+ого в в+ашей корз+ине н+ету.";
 				}
 				else
 				{
-					std::cout << "Инфо: Нашли такой предмет" << std::endl;
+					cout << "Инфо: Нашли такой предмет";
 					text = "Удалила.";
 					tts = "Удал+ила";
 					(*cur_session)["cart"].erase((*cur_session)["cart"].begin() + item_index);
-					std::cout << "Инфо: Удалили предмет" << std::endl;
+					cout << "Инфо: Удалили предмет";
 				}
 			}
 			json response = gen_response(
@@ -939,8 +940,8 @@ void AliceSkill(const Request& req, Response& res)
 		}
 		else
 		{
-			std::string text = "Я не знаю такую команду.";
-			std::string tts = "Я не зн+аю так+ую ком+анду.";
+			string text = "Я не знаю такую команду.";
+			string tts = "Я не зн+аю так+ую ком+анду.";
 
 			json response = gen_response(
 				text,
@@ -954,7 +955,7 @@ void AliceSkill(const Request& req, Response& res)
 
 	// Сохранить сессии в файл
 
-	std::cout << std::endl;
+	cout;
 }
 
 int main()
