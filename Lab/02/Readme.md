@@ -74,6 +74,7 @@
 5)Ссылка на excel файл<br>
 "ссылка"<br>
 6)Код серверного приложения<br>
+
 ```cpp
 #include <iostream>
 #include <cpp_httplib/httplib.h>
@@ -82,7 +83,6 @@
 #include <fstream>
 #include <vector>
 #include <filesystem>
-
 
 using namespace std;
 // в свойствах проекта во вкладке c++/язык нужно поменять стандарт на iso c++ 17 ч
