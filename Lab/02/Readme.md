@@ -140,6 +140,7 @@ json GetConfig()//... СОЗДАНИЕ ЛИБО НАХОЖДЕНИЕ КОНФИ�
 	}
 	return config;
 }
+
 void SaveConfig(json config)// ...СОХРАНЕНИЕ КОНФИГ ФАЙЛА...
 {
 	fs::path config_path{ ConfigFile };
@@ -160,8 +161,6 @@ void SaveConfig(json config)// ...СОХРАНЕНИЕ КОНФИГ ФАЙЛА..
 		cout << "Не удалось создать файл по пути\n " << fs::absolute(config_path) << "!";
 	}
 }
-
-
 
 void gen_responce_weblist(const Request& req, Response& res) {
 	ifstream webpage_file(WebpageFile);
@@ -206,11 +205,10 @@ void gen_responce_weblist(const Request& req, Response& res) {
 			}
 		}
 	}
+
 Replacement(webpage, "{webhooks_list}", webhook_list);
 res.set_content(webpage, "text/html;charset=utf-8");
-
 }
-
 
 string gen_webhook_page()//ФУНКЦИЯ ДЛЯ СТРАНИЦЫ С ВЭБХУКАМИ
 {
@@ -266,6 +264,7 @@ void GetWebhook(const Request& req, Response& res)//...ФУНКЦИЯ GET ЗАП
 	res.set_content(gen_webhook_page(), "text/html; charset=UTF-8");
 	cout << "\n";
 }
+
 void PostWebhook(const Request& req, Response& res)//... ФУНККЦИЯ POST ЗАПРОСОВ...
 {
 	if (config.empty())
@@ -341,10 +340,10 @@ void PostWebhook(const Request& req, Response& res)//... ФУНККЦИЯ POST �
 			}
 		}
 	}
-	SaveConfig(config);
-
-	res.set_content(gen_webhook_page(), "text/html; charset=UTF-8");
-	cout << "\n";
+	
+SaveConfig(config);
+res.set_content(gen_webhook_page(), "text/html; charset=UTF-8");
+cout << "\n";
 }
 
 enum voice_mode
@@ -371,7 +370,9 @@ enum skill_mode
 		]
 	}
 ]*/
+
 json session_list = json::array();
+
 json default_state_buttons =
 {
 	{
@@ -379,11 +380,13 @@ json default_state_buttons =
 		{"hide", true}
 	},
 };
+
 json speak_mode_button =
 {
 	{"title", "Говорить"},
 	{"hide", true}
 };
+
 json silent_mode_button =
 {
 	{"title", "Молчать"},
@@ -450,6 +453,7 @@ json gen_response(const std::string& text,
 	}
 	return response;
 }
+
 void AliceSkill(const Request& req, Response& res)
 {
 	json req_json = json::parse(req.body);
