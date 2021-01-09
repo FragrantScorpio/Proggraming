@@ -206,8 +206,8 @@ void gen_responce_weblist(const Request& req, Response& res) {
 			}
 		}
 	}
-	Replacement(webpage, "{webhooks_list}", webhook_list);
-	res.set_content(webpage, "text/html;charset=utf-8");
+Replacement(webpage, "{webhooks_list}", webhook_list);
+res.set_content(webpage, "text/html;charset=utf-8");
 
 }
 
