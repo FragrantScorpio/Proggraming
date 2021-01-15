@@ -81,6 +81,6 @@
 
 5)Код серверного приложения<br>
 
-[](./MainServer2lab.cpp)
+[Example]: ./MainServer2lab.cpp
 
 6)Кол клиентского приложения<br>
