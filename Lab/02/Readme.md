@@ -69,15 +69,15 @@
 
 2)Функционал корзины
 
-![](./imag/1pic02.png)
+![](./imag/BinPic.png)
 
 3)Функционал помощи
 
-![](./imag/1pic03.png)
+![](./imag/HelpPic.png)
 
 4)Страница управления вебхуками
 
-![](./imag/1pic03.png)
+![](./imag/HookListPic.png)
 
 5)Код серверного приложения<br>
 
