@@ -14,8 +14,6 @@ def reload_data(event=None):
 
 root = Tk()
 root.title("Погода")
-root.pack_propagate(0)
-root.bind("<Button-1>", reload_data)
 root.geometry("200x250")
 
 _yellow = "#ffb84d"
