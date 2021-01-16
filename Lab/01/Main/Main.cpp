@@ -9,9 +9,9 @@ using namespace httplib;
 using namespace std;
 using json = nlohmann::json;
 
-void Replacement(std::string& data, std::string toSearch, std::string replaceStr) {
+void Replacement(string& data, string toSearch, string replaceStr) {
     size_t pos = data.find(toSearch);
-    while (pos != std::string::npos) {
+    while (pos != string::npos) {
         data.replace(pos, toSearch.size(), replaceStr);
         pos = data.find(toSearch, pos + replaceStr.size());
     }
