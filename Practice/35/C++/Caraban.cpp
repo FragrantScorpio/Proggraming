@@ -57,7 +57,7 @@ if (newSize == arr.size)
         arr.data = newArray;
         arr.size = newSize;
     }
-    else
+    else if(newSize < arr.size)
     {
         int* newArray = new int[newSize];
         memcpy(newArray, arr.data, sizeof(int) * newSize);
